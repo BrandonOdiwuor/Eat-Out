@@ -3,11 +3,11 @@ import 'package:rxdart/rxdart.dart';
 import 'restaurant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class RestaurantBloc {
+class RestaurantsBloc {
   String _currentRestaurantType;
   String _currentRestaurantLocation;
 
-  RestaurantBloc() {
+  RestaurantsBloc() {
     _typeFilterController.stream.listen(_handleTypeFilter);
     _locationFilterController.stream.listen(_handleLocationFilter);
     _currentRestaurantType = restaurantTypes[0];
