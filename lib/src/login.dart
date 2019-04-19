@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'colors.dart';
+import 'register.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -87,6 +88,27 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 ),
               ],
+            ),
+            SizedBox(height: 12.0),
+            Center(
+              child: GestureDetector(
+                child: Text(
+                  'No account yet? Create one',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16.0,
+                    color: cranePurple700,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Register(),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
