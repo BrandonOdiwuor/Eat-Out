@@ -17,7 +17,8 @@ class AuthenticationForm extends StatefulWidget {
 
 class _AuthenticationFormState extends State<AuthenticationForm> {
   final _emailController = TextEditingController();
-  final _passwordControlelr = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _usernameController = TextEditingController();
   String text;
   Function onTap;
 
@@ -64,6 +65,7 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
               ],
             ),
             SizedBox(height: 120.0),
+            _usernameField(),
             TextField(
               controller: _emailController,
               decoration: InputDecoration(
@@ -75,7 +77,7 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
             ),
             SizedBox(height: 12.0),
             TextField(
-              controller: _passwordControlelr,
+              controller: _passwordController,
               decoration: InputDecoration(
                 labelText: 'Password',
                 labelStyle: TextStyle(
@@ -98,7 +100,7 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
                   ),
                   onPressed: () {
                     _emailController.clear();
-                    _passwordControlelr.clear();
+                    _passwordController.clear();
                   },
                 ),
                 RaisedButton(
@@ -140,10 +142,26 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
     );
   }
 
+  Widget _usernameField() {
+    if(widget.type.toUpperCase() == 'REGISTER') {
+      return TextField(
+        controller: _usernameController,
+        decoration: InputDecoration(
+          labelText: 'Username',
+          labelStyle: TextStyle(
+            color: cranePurple700,
+          ),
+        ),
+      );
+    } else {
+      return Container();
+    }
+  }
+
   void _handler() {
     widget.handler(
       email: _emailController.text,
-      password: _passwordControlelr.text,
+      password: _passwordController.text,
     );
   }
 }

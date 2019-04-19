@@ -6,7 +6,7 @@ class Register extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AuthenticationForm(
-        type: 'SIGN UP',
+        type: 'REGISTER',
         handler: handler,
       ),
     );
