@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'model/restaurant.dart';
 import 'model/reviews_bloc.dart';
-import 'review_tile.dart';
+import 'partials/review_tile.dart';
 import 'model/review.dart';
-import 'colors.dart';
-import 'review_form.dart';
+import 'partials/colors.dart';
+import 'partials/review_form.dart';
 
 class RestaurantPage extends StatelessWidget {
   final Restaurant restaurant;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'model/reviews_bloc.dart';
-import 'model/restaurant.dart';
-import 'model/review.dart';
+import '../model/reviews_bloc.dart';
+import '../model/restaurant.dart';
+import '../model/review.dart';
 
 class ReviewForm extends StatefulWidget {
   final ReviewsBloc bloc;

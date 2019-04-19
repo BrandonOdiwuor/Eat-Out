@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dropdown_button.dart';
+import 'partials/dropdown_button.dart';
 import 'model/restaurant.dart';
-import 'restaurant_tile.dart';
+import 'package:eat_out/src/partials/restaurant_tile.dart';
 import 'model/restaurants_bloc.dart';
-import 'colors.dart';
+import 'partials/colors.dart';
 
 class HomePage extends StatefulWidget {
   final bloc = RestaurantsBloc();

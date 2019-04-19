@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
-import 'colors.dart';
-import 'login.dart';
+import 'partials/colors.dart';
+import 'model/user.dart';
+import 'login_register_page.dart';
 
 class EatOutApp extends StatelessWidget {
+  final User user = User();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,7 +16,7 @@ class EatOutApp extends StatelessWidget {
       theme: _buildTheme(),
       initialRoute: '/login',
       routes: {
-        '/login': (context) => LoginPage()
+        '/login': (context) => LoginRegisterPage(user: user),
       },
     );
   }

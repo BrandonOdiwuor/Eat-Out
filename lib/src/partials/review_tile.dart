@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'model/review.dart';
+import '../model/review.dart';
 import 'colors.dart';
 
 class ReviewTile extends StatelessWidget{
