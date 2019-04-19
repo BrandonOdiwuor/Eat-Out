@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
+import 'authentication_form.dart';
 
-class Register extends StatefulWidget {
-  @override
-  _RegisterState createState() => _RegisterState();
-}
-
-class _RegisterState extends State<Register> {
+class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Text('Register'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
+      body: AuthenticationForm(
+        type: 'SIGN UP',
+        handler: handler,
       ),
     );
+  }
+
+  void handler({String email, String password}) {
+
   }
 }
