@@ -23,6 +23,7 @@ class EatOutApp extends StatelessWidget {
     return base.copyWith(
       primaryColor: cranePurple800,
       accentColor: craneRed700,
+      errorColor: craneErrorOrange,
       buttonTheme: base.buttonTheme.copyWith(
         buttonColor: cranePurple800,
       ),
