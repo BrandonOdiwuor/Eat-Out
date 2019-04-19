@@ -16,6 +16,7 @@ class AuthenticationForm extends StatefulWidget {
 }
 
 class _AuthenticationFormState extends State<AuthenticationForm> {
+  final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _usernameController = TextEditingController();
@@ -48,103 +49,118 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
     return Scaffold(
       //backgroundColor: cranePurple800,
       body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
-          children: <Widget>[
-            SizedBox(height: 80.0),
-            Column(
-              children: <Widget>[
-                Text(
-                  'Eat Out',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 24.0,
-                    color: cranePurple700,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 120.0),
-            _usernameField(),
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-                labelStyle: TextStyle(
-                  color: cranePurple700,
-                ),
-              ),
-            ),
-            SizedBox(height: 12.0),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                labelStyle: TextStyle(
-                  color: cranePurple700,
-                ),
-              ),
-              obscureText: true,
-            ),
-            ButtonBar(
-              children: <Widget>[
-                FlatButton(
-                  child: Text(
-                    'CANCEL',
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            padding: EdgeInsets.symmetric(horizontal: 24.0),
+            children: <Widget>[
+              SizedBox(height: 80.0),
+              Column(
+                children: <Widget>[
+                  Text(
+                    'Eat Out',
                     style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 24.0,
                       color: cranePurple700,
                     ),
                   ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4.0))
-                  ),
-                  onPressed: () {
-                    _emailController.clear();
-                    _passwordController.clear();
-                  },
-                ),
-                RaisedButton(
-                  color: cranePurple700,
-                  child: Text(
-                    widget.type.toUpperCase(),
-                    style: TextStyle(
-                      color: Colors.white,
+                ],
+              ),
+              SizedBox(height: 120.0),
+              _usernameField(),
+              TextFormField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    labelStyle: TextStyle(
+                      color: cranePurple700,
                     ),
                   ),
-                  elevation: 8.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4.0))
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    _handler;
+                  validator: (String email) {
+                    if(email.isEmpty) {
+                      return '* Email required';
+                    }
                   },
-                ),
-              ],
-            ),
-            SizedBox(height: 12.0),
-            Center(
-              child: GestureDetector(
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16.0,
+              ),
+              SizedBox(height: 12.0),
+              TextFormField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  labelStyle: TextStyle(
                     color: cranePurple700,
                   ),
                 ),
-                onTap: onTap,
+                obscureText: true,
+                validator: (String password) {
+                  if(password.isEmpty) {
+                    return '* Password required';
+                  }
+                },
               ),
-            ),
-          ],
-        ),
+              ButtonBar(
+                children: <Widget>[
+                  FlatButton(
+                    child: Text(
+                      'CANCEL',
+                      style: TextStyle(
+                        color: cranePurple700,
+                      ),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4.0))
+                    ),
+                    onPressed: () {
+                      _emailController.clear();
+                      _passwordController.clear();
+                    },
+                  ),
+                  RaisedButton(
+                    color: cranePurple700,
+                    child: Text(
+                      widget.type.toUpperCase(),
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    elevation: 8.0,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(4.0))
+                    ),
+                    onPressed: () {
+                      if(_formKey.currentState.validate()) {
+                        Navigator.pop(context);
+                        _handler;
+                      }
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(height: 12.0),
+              Center(
+                child: GestureDetector(
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16.0,
+                      color: cranePurple700,
+                    ),
+                  ),
+                  onTap: onTap,
+                ),
+              ),
+            ],
+          ),
+        )
       ),
     );
   }
 
   Widget _usernameField() {
     if(widget.type.toUpperCase() == 'REGISTER') {
-      return TextField(
+      return TextFormField(
         controller: _usernameController,
         decoration: InputDecoration(
           labelText: 'Username',
@@ -152,6 +168,11 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
             color: cranePurple700,
           ),
         ),
+        validator: (String username) {
+          if(username.isEmpty) {
+            return '* Username required';
+          }
+        },
       );
     } else {
       return Container();
