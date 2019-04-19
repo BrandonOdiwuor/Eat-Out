@@ -83,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   onPressed: () {
                     Navigator.pop(context);
+                    _handleSignIn();
                   },
                 ),
               ],
@@ -91,5 +92,9 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void _handleSignIn() {
+    // TODO: Implement Sign In Function
   }
 }
