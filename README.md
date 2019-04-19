@@ -7,7 +7,6 @@ The application allows users loged in using firebase authentication to check res
 ## Screenshots
 <img src='screenshots/screenshot1.png' width='350'>|<img src='screenshots/screenshot2.png' width='350'>
 :-------------------------------------------------:|:---------------------------------------------------:
-
 <img src='screenshots/screenshot3.png' width='350'>|<img src='screenshots/screenshot4.png' width='350'>
 :-------------------------------------------------:|:---------------------------------------------------:
 <p align="center">
