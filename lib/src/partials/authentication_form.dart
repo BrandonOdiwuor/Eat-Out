@@ -23,6 +23,8 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
   String _switchFormText;
   Function _handler;
   bool _isLoading;
+  bool _error;
+  String _errorMessage;
 
   @override
   void initState() {
@@ -31,6 +33,8 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
     _switchFormText = 'Create an account';
     _handler = _loginHandler();
     _isLoading = false;
+    _error = false;
+    _errorMessage = '';
     super.initState();
   }
 
@@ -70,7 +74,7 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
                 ),
               ],
             ),
-            SizedBox(height: 120.0),
+            _errorBox(),
             _usernameField(),
             SizedBox(height: 12.0),
             _emailField(),
@@ -208,8 +212,9 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
     } on PlatformException catch (error) {
       setState(() {
         _isLoading = false;
+        _error = true;
+        _errorMessage = error.message;
       });
-      print(error);
     }
   };
 
@@ -234,8 +239,9 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
     } on PlatformException catch (error) {
       setState(() {
         _isLoading = false;
+        _error = true;
+        _errorMessage = error.message;
       });
-      print(error);
     }
   };
 
@@ -271,7 +277,29 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
         _handler = _loginHandler();
       });
     }
+    if(_error) {
+      setState(() {
+        _error = false;
+        _errorMessage = '';
+      });
+    }
   };
+
+  Widget _errorBox() {
+    if(_error) {
+      return SizedBox(
+        height: 120.0,
+        child: Container(
+          child: Text(
+            _errorMessage,
+            style: TextStyle(color: craneErrorOrange),
+          ),
+          padding: EdgeInsets.only(top: 60.0),
+        ),
+      );
+    }
+    return SizedBox(height: 120.0);
+  }
 }
 
 enum FormMode {
