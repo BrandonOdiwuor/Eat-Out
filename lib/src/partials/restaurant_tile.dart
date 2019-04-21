@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import '../model/restaurant.dart';
 import '../restaurant_page.dart';
+import '../model/authentication.dart';
 
 class RestaurantTile extends StatelessWidget {
   final Restaurant restaurant;
+  final Authentication authentication;
 
-  RestaurantTile({@required this.restaurant}) : assert(restaurant != null);
+  RestaurantTile({@required this.restaurant, @required this.authentication})
+      : assert(restaurant != null),
+        assert(authentication != null);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,10 @@ class RestaurantTile extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => RestaurantPage(restaurant: restaurant),
+            builder: (context) => RestaurantPage(
+              restaurant: restaurant,
+              authentication: authentication,
+            ),
           ),
         );
       },

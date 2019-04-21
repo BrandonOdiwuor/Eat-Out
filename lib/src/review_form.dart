@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
-import '../model/reviews_bloc.dart';
-import '../model/restaurant.dart';
-import '../model/review.dart';
+import 'package:meta/meta.dart';
+import 'model/reviews_bloc.dart';
+import 'model/restaurant.dart';
+import 'model/review.dart';
+import 'model/authentication.dart';
 
 class ReviewForm extends StatefulWidget {
   final ReviewsBloc bloc;
   final Restaurant restaurant;
+  final Authentication authentication;
 
-  ReviewForm({this.bloc, this.restaurant});
+  ReviewForm({
+    @required this.bloc,
+    @required this.restaurant,
+    @required this.authentication
+});
 
   @override
   _ReviewFormState createState() => _ReviewFormState();
@@ -79,7 +86,7 @@ class _ReviewFormState extends State<ReviewForm> {
                 if(_formKey.currentState.validate()) {
 
                   final review = Review(
-                    reviewer: 'Brandon Odiwuor',
+                    reviewer: widget.authentication.userModel.user.name,
                     rating: int.parse(_ratingController.text),
                     comment: _commentController.text,
                     restaurantId: widget.restaurant.reference.documentID,

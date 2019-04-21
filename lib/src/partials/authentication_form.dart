@@ -219,6 +219,7 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
       bool isSuccessful = await widget.authentication.register(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
+        username: _usernameController.text.trim(),
       );
       if(isSuccessful) {
         setState(() {

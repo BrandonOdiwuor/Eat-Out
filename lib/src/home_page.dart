@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'partials/dropdown_button.dart';
 import 'model/restaurant.dart';
-import 'package:eat_out/src/partials/restaurant_tile.dart';
+import 'partials/restaurant_tile.dart';
 import 'model/restaurants_bloc.dart';
 import 'partials/colors.dart';
 import 'model/authentication.dart';
@@ -95,7 +95,12 @@ class _HomePageState extends State<HomePage> {
           initialData: <Restaurant>[],
           builder: (context, snapshot) {
             return ListView(
-              children: snapshot.data.map((restaurant) => RestaurantTile(restaurant: restaurant)).toList(),
+              children: snapshot.data.map((restaurant){
+                return RestaurantTile(
+                  restaurant: restaurant,
+                  authentication: widget.authentication,
+                );
+              }).toList(),
             );
           }
       ),

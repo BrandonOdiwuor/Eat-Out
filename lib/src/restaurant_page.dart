@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 import 'model/restaurant.dart';
 import 'model/reviews_bloc.dart';
 import 'partials/review_tile.dart';
 import 'model/review.dart';
 import 'partials/colors.dart';
-import 'partials/review_form.dart';
+import 'review_form.dart';
+import 'model/authentication.dart';
 
 class RestaurantPage extends StatelessWidget {
   final Restaurant restaurant;
   ReviewsBloc bloc;
+  final Authentication authentication;
 
-  RestaurantPage({this.restaurant}) {
+  RestaurantPage({@required this.restaurant, @required this.authentication}) {
     bloc = ReviewsBloc(
         restaurantId: restaurant.reference.documentID
     );
@@ -30,6 +33,7 @@ class RestaurantPage extends StatelessWidget {
                 builder: (context) => ReviewForm(
                   bloc: bloc,
                   restaurant: restaurant,
+                  authentication: authentication,
                 ),
               ),
             );
