@@ -4,9 +4,14 @@ import 'model/restaurant.dart';
 import 'package:eat_out/src/partials/restaurant_tile.dart';
 import 'model/restaurants_bloc.dart';
 import 'partials/colors.dart';
+import 'model/authentication.dart';
+import 'login_register_page.dart';
 
 class HomePage extends StatefulWidget {
   final bloc = RestaurantsBloc();
+  final Authentication authentication;
+
+  HomePage({this.authentication});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -19,6 +24,9 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text('Eat Out'),
         elevation: 0.0,
+        actions: <Widget>[
+          _logout(),
+        ],
       ),
       body: _body(context),
       backgroundColor: cranePurple800,
@@ -121,6 +129,27 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _logout() {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.only(right: 16.0),
+        child: GestureDetector(
+          child: Text('Logout'),
+          onTap: () {
+            widget.authentication.logout();
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: ((context) => LoginRegisterPage(authentication: widget.authentication)),
+              ),
+              (Route<dynamic> route) => false,
+            );
+          },
+        ),
+      ),
     );
   }
 

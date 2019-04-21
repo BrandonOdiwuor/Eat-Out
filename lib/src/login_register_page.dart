@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'partials/authentication_form.dart';
-import 'model/user.dart';
+import 'model/authentication.dart';
 
 class LoginRegisterPage extends StatelessWidget {
-  final User user;
+  final Authentication authentication;
 
-  LoginRegisterPage({this.user});
+  LoginRegisterPage({this.authentication});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AuthenticationForm(user: user),
+      body: AuthenticationForm(authentication: authentication),
     );
   }
 

@@ -54,7 +54,7 @@ class RestaurantPage extends StatelessWidget {
           stream: bloc.isLoading,
           initialData: true,
           builder: (context, snapshot) {
-            if(snapshot == true) {
+            if(snapshot.data == true) {
               return LinearProgressIndicator();
             } else {
               return _displayReviews();

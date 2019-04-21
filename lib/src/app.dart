@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart';
 import 'partials/colors.dart';
-import 'model/user.dart';
+import 'model/authentication.dart';
 import 'login_register_page.dart';
 
 class EatOutApp extends StatelessWidget {
-  final User user = User();
+  final Authentication authentication = Authentication();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Eat Out',
-      home: HomePage(),
+      home: LoginRegisterPage(authentication: authentication),
       debugShowCheckedModeBanner: false,
       theme: _buildTheme(),
-      initialRoute: '/login',
-      routes: {
-        '/login': (context) => LoginRegisterPage(user: user),
-      },
     );
   }
 

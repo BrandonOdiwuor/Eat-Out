@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'colors.dart';
-import '../model/user.dart';
+import '../model/authentication.dart';
+import 'package:flutter/services.dart';
+import '../home_page.dart';
 
 class AuthenticationForm extends StatefulWidget {
-  final User user;
+  final Authentication authentication;
 
-  AuthenticationForm({this.user});
+  AuthenticationForm({this.authentication});
 
   @override
   _AuthenticationFormState createState() => _AuthenticationFormState();
@@ -20,6 +22,7 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
   String _buttonText;
   String _switchFormText;
   Function _handler;
+  bool _isLoading;
 
   @override
   void initState() {
@@ -27,12 +30,24 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
     _buttonText = 'LOGIN';
     _switchFormText = 'Create an account';
     _handler = _loginHandler();
+    _isLoading = false;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return _form();
+    return Stack(
+      children: <Widget>[
+        _form(),
+        _loading(),
+      ],
+    );
+  }
+
+  Widget _loading() {
+    if (_isLoading) {
+      return Center(child: CircularProgressIndicator());
+    } return Container(height: 0.0, width: 0.0,);
   }
 
   Widget _form() {
@@ -174,22 +189,52 @@ class _AuthenticationFormState extends State<AuthenticationForm> {
   }
 
   Function _loginHandler() => () async {
-    bool isSuccessful = await widget.user.login(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    );
-    if(isSuccessful) {
-      print('Signed in successfully');
+    _isLoading = true;
+    try {
+      bool isSuccessful = await widget.authentication.login(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+      if(isSuccessful) {
+        setState(() {
+          _isLoading = false;
+        });
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: ((context) => HomePage(authentication: widget.authentication)),
+          ),
+        );
+      }
+    } on PlatformException catch (error) {
+      setState(() {
+        _isLoading = false;
+      });
+      print(error);
     }
   };
 
   Function _registerHandler() => () async {
-    bool isSuccessful = await widget.user.register(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    );
-    if(isSuccessful) {
-      print('Signed up successfully');
+    _isLoading = true;
+    try {
+      bool isSuccessful = await widget.authentication.register(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+      if(isSuccessful) {
+        setState(() {
+          _isLoading = false;
+        });
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: ((context) => HomePage(authentication: widget.authentication)),
+          ),
+        );
+      }
+    } on PlatformException catch (error) {
+      setState(() {
+        _isLoading = false;
+      });
+      print(error);
     }
   };
 
